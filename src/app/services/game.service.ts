@@ -35,7 +35,7 @@ export class GameService {
 
     private _score: number = 0;
     set score(score: number) {
-        this._score = score;
+        this._score = this.scoreService.setCurrentScore(this.name, score);
         this.scoreChange.next(this.score);
     }
     get score() {
@@ -89,7 +89,7 @@ export class GameService {
 
     public start(name: string): void {
         this.name = name;
-        this.score = 0;
+        this.score = this.scoreService.getCurrentScore(this.name);
         this.highScore = this.scoreService.getHighScore(this.name);
         this.setTimer();
     }
