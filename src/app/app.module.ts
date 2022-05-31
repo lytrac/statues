@@ -16,6 +16,8 @@ import { GameService } from './services/game.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,11 +28,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     ReactiveFormsModule,
     MatIconModule,
     MatFormFieldModule,
     MatTooltipModule,
     MatButtonModule,
+    MatButtonToggleModule,
     MatToolbarModule,
     MatInputModule,
     BrowserAnimationsModule,

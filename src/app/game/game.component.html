@@ -1,14 +1,16 @@
-<mat-toolbar>
-    <button mat-icon-button aria-label="Go back" matTooltip="Go back" (click)="returnToHome()">
-        <mat-icon>keyboard_backspace</mat-icon>
-    </button>
-    <span>Hi {{name}}</span>
-</mat-toolbar>
-
-High score: {{highScore}}
+<h1>High score: {{highScore}}</h1>
 
 <mat-icon class="game__icon" [ngClass]="lightColorClass">traffic</mat-icon>
-Score: {{score}}
 
-<button mat-button (click)="left()">Left</button>
-<button mat-button (click)="right()">Right</button>
+<h2>Score: {{score}}</h2>
+
+<div>
+    <button mat-raised-button color="primary" class="game__button game__button--left" (click)="left()">
+            <mat-icon svgIcon="steps-left"></mat-icon>
+            <span>Left</span>
+    </button>
+    <button mat-raised-button color="primary" class="game__button game__button--right" (click)="right()">
+            <span>Right</span>
+            <mat-icon svgIcon="steps-right"></mat-icon>
+    </button>
+</div>

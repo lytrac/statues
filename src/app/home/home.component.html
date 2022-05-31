@@ -1,10 +1,14 @@
-<mat-icon>traffic</mat-icon>
-Create new player
-<div>
-  <mat-form-field appearance="fill">
-    <mat-label>Name</mat-label>
-    <input matInput placeholder="Name" [formControl]="name" required>
-    <mat-error *ngIf="name.invalid">Introduce a user name</mat-error>
-  </mat-form-field>
+<div class="home">
+
+  <mat-icon class="home__icon" color="accent">traffic</mat-icon>
+
+  <h1>Create new player</h1>
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Name" [formControl]="name" required>
+      <mat-error *ngIf="name.invalid">Enter a username</mat-error>
+    </mat-form-field>
+  </div>
+  <button mat-raised-button color="primary" (click)="onSubmit()">Join</button>
 </div>
-<button mat-button (click)="onSubmit()">Join</button>

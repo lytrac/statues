@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RouterService } from '../services/router.service';
 
 @Component({
     selector: 'app-home',
@@ -9,14 +10,13 @@ import { Router } from '@angular/router';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent {
-    constructor(private router: Router) { }
+    constructor(private routerService: RouterService) { }
 
     name = new FormControl('', Validators.required);
 
     onSubmit(): void {
-        console.log("Submit");
         if (this.name.valid) {
-            this.router.navigateByUrl('/game/' + this.name.value);
+            this.routerService.openGame(this.name.value);            
         }
     }
 }

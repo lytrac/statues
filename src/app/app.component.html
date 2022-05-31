@@ -1,6 +1,16 @@
-<mat-toolbar>
-    <span>Statues</span>
-</mat-toolbar>
-<div class="content">
-    <router-outlet></router-outlet>
+<div class="container">
+    <mat-toolbar>
+        <div class="toolbar__lead-button">
+            <button *ngIf="!home" mat-icon-button aria-label="Go back" matTooltip="Go back" (click)="goBack()">
+                <mat-icon>keyboard_backspace</mat-icon>
+            </button>
+        </div>
+        <span class="toolbar__title">{{title}}</span>
+        <button *ngIf="home" mat-icon-button aria-label="Ranking" matTooltip="Ranking" (click)="goToRanking()">
+            <mat-icon>score</mat-icon>
+        </button>
+    </mat-toolbar>
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div>
 </div>
