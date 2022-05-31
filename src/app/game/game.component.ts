@@ -1,11 +1,9 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs';
-import { GameService, LightColor, Step } from '../services/game.service';
+import { GameService, Step } from '../services/game.service';
 import { RouterService } from '../services/router.service';
-import { ScoreService } from '../services/score.service';
 
 const nameProperty = "name";
 
@@ -13,9 +11,10 @@ const nameProperty = "name";
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [GameService]
 })
-export class GameComponent implements OnInit {
+export class GameComponent implements OnInit, OnDestroy {
 
   score: number = 0;
   highScore: number = 0;
@@ -50,6 +49,10 @@ export class GameComponent implements OnInit {
 
       this.start(params[nameProperty]);
     });
+  }
+
+  ngOnDestroy(): void {
+    this.gameService.stop();
   }
 
   start(name: string) {

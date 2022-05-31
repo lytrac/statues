@@ -4,7 +4,7 @@ import { GameComponent } from './game/game.component';
 import { HomeComponent } from './home/home.component';
 import { PATHS } from './services/router.service';
 
-const routes: Routes = [
+export const routes: Routes = [
   { path: PATHS.home, component: HomeComponent },
   { path: PATHS.game, component: GameComponent },
   { path: '**', redirectTo: PATHS.home }

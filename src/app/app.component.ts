@@ -24,7 +24,6 @@ export class AppComponent {
         } else {
           this.home = false;
           if (this.routerService.isGame(navigationEndEvent)) {
-            console.log(this.router)
             this.title = `Hi ${this.activatedRoute.snapshot.queryParamMap.get('name')}`;
           }
         }

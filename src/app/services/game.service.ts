@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Subject, timer } from "rxjs";
+import { Subject, Subscription, takeUntil, timer } from "rxjs";
 import { ScoreService } from "./score.service";
 
 export enum Step {
@@ -14,6 +14,12 @@ export enum LightColor {
     Green
 }
 
+const TIME_GREEN = 10000;
+const TIME_GREEN_VARIATION = 3000;
+const TIME_GREEN_MIN = 2000;
+const TIME_GREEN_DECREMENT = 100;
+const TIME_RED = 3000;
+
 @Injectable({
     providedIn: "root"
 })
@@ -24,6 +30,8 @@ export class GameService {
 
     private lastStep: Step = Step.None;
     private lightColor = LightColor.Off;
+
+    private timeout: any;
 
     private _score: number = 0;
     set score(score: number) {
@@ -56,17 +64,19 @@ export class GameService {
         }
     }
 
-    public step(stepSide: Step): void {
+    public step(stepSide: Step): number {
+        if (this.lightColor === LightColor.Off) return this.score;
+
         if (this.lightColor === LightColor.Red) {
             this.score = 0;
-            return;
+            return this.score;
         }
 
         if (this.lastStep == stepSide) {
             if (this.score > 0) {
                 this.score--;
             }
-            return;
+            return this.score;
         }
 
         this.lastStep = stepSide;
@@ -74,6 +84,7 @@ export class GameService {
         if (this.score > this.highScore) {
             this.highScore = this.score;
         }
+        return this.score;
     }
 
     public start(name: string): void {
@@ -83,8 +94,12 @@ export class GameService {
         this.setTimer();
     }
 
+    public stop() {
+        clearTimeout(this.timeout);
+    }
+
     private setTimer(): void {
-        timer(this.getLightTime()).subscribe(() => this.lightChange.next(this.changeColor()));
+        this.timeout = setTimeout(() => this.lightChange.next(this.changeColor()), this.getLightTime());
     }
 
     private changeColor(): LightColor {
@@ -102,8 +117,8 @@ export class GameService {
             return 0;
         }
         if (this.lightColor === LightColor.Green) {
-            return Math.max(10000 - this.score * 100, 2000) + ((Math.random() * 3000) - 1500);
+            return Math.max(TIME_GREEN - this.score * TIME_GREEN_DECREMENT, TIME_GREEN_MIN) + ((Math.random() * TIME_GREEN_VARIATION) - (TIME_GREEN_VARIATION / 2));
         }
-        return 3000;
+        return TIME_RED;
     }
 }
