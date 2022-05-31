@@ -16,6 +16,7 @@ describe('GameComponent', () => {
     })
       .compileComponents();
     gameService = TestBed.inject(GameService);
+    localStorage.clear();
   });
 
   beforeEach(() => {
@@ -23,6 +24,10 @@ describe('GameComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     component.start("David");
+  });
+
+  afterEach(() => {
+    localStorage.clear();
   });
 
   it('should create', () => {

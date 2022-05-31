@@ -13,12 +13,14 @@ describe('GameService', () => {
     });
 
     beforeEach(async () => {
+        localStorage.clear();
         gameService = TestBed.inject(GameService);
         gameService.start("David");
     });
 
     afterEach(() => {
         gameService.stop();
+        localStorage.clear();
     });
 
     afterAll(() => {

@@ -8,6 +8,7 @@ describe('ScoreService', () => {
 
     beforeEach(async () => {
         scoreService = TestBed.inject(ScoreService);
+        localStorage.clear();
     });
 
     it('should update highscore', () => {
@@ -19,9 +20,9 @@ describe('ScoreService', () => {
         scoreService.setHighScore("Fernando", 50);
         scoreService.setHighScore("Fernando", 25);
         expect(scoreService.getHighScore("Fernando")).toBe(50);
-    })
+    });
 
-
-
-
+    afterEach(() => {
+        localStorage.clear();
+    });
 });
