@@ -3,19 +3,19 @@
     <!-- Name Column -->
     <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      <td mat-cell *matCellDef="let element">{{element.name}}</td>
     </ng-container>
   
     <!-- Highscore Column -->
     <ng-container matColumnDef="highScore">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Highscore </th>
-      <td mat-cell *matCellDef="let element"> {{element.highScore}}</td>
+      <td mat-cell *matCellDef="let element">{{element.highScore}}</td>
     </ng-container>
   
     <!-- CurrentScore Column -->
     <ng-container matColumnDef="currentScore">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Current score </th>
-      <td mat-cell *matCellDef="let element"> {{element.currentScore}} </td>
+      <td mat-cell *matCellDef="let element">{{element.currentScore}}</td>
     </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="['name', 'highScore', 'currentScore']"></tr>

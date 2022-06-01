@@ -11,7 +11,10 @@
     "local-prod": "http-server -p 4200 -c-1 dist/statues",
     "lint": "ng lint",
     "compile-analyze-bundle": "ng build --stats-json",
-    "view-analyze-bundle": "webpack-bundle-analyzer dist/statues/stats.json"
+    "view-analyze-bundle": "webpack-bundle-analyzer dist/statues/stats.json",
+    "e2e": "ng e2e",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "private": true,
   "dependencies": {
@@ -39,10 +42,12 @@
     "@angular-eslint/template-parser": "13.2.1",
     "@angular/cli": "~13.3.7",
     "@angular/compiler-cli": "~13.3.0",
+    "@cypress/schematic": "^1.7.0",
     "@types/jasmine": "~3.10.0",
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "5.17.0",
     "@typescript-eslint/parser": "5.17.0",
+    "cypress": "^9.7.0",
     "eslint": "^8.12.0",
     "jasmine-core": "~4.0.0",
     "karma": "~6.3.0",
