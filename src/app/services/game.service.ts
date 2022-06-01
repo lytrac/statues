@@ -101,6 +101,7 @@ export class GameService {
 
     public stop() {
         clearTimeout(this.timeout);
+        this.mediaService.stopAudio();
     }
 
     private setTimer(): void {

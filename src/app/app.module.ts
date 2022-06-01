@@ -18,13 +18,17 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { HttpClientModule } from '@angular/common/http';
 import { ButtonComponent } from './button/button.component';
+import { RankingComponent } from './ranking/ranking.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     GameComponent,
-    ButtonComponent
+    ButtonComponent,
+    RankingComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +38,8 @@ import { ButtonComponent } from './button/button.component';
     MatIconModule,
     MatFormFieldModule,
     MatTooltipModule,
+    MatTableModule,
+    MatSortModule,
     MatButtonModule,
     MatButtonToggleModule,
     MatToolbarModule,

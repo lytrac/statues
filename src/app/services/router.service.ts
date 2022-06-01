@@ -44,4 +44,16 @@ export class RouterService {
     openGame(name: string): void {
         this.router.navigate([PATHS.game], { queryParams: { name } });
     }
+
+    getCurrentSection(navigationEndEvent: NavigationEnd): string {
+        if (this.isHome(navigationEndEvent)) {
+            return PATHS.home;
+        } else {
+            if (this.isGame(navigationEndEvent)) {
+                return PATHS.game;
+            } else {
+                return PATHS.ranking;
+            }
+        }
+    }
 }

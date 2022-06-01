@@ -40,7 +40,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     setTimeout(() => {
       expect(app.title).toEqual('Statues');
-      expect(app.home).toEqual(true);
+      expect(app.section).toEqual(PATHS.home);
       done();
     }, 0);
   }));

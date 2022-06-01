@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 
-class Score {
+export class Score {
     currentScore: number;
     highestScore: number;
 
@@ -66,10 +66,13 @@ export class ScoreService {
     private getLocalStorageData(): Map<string, Score> {
         const localStorageData = localStorage.getItem(DATA_NAME);
         if (localStorageData) {
-            const parsed = new Map<string, Score>(Object.entries(JSON.parse(localStorageData)));
-            return parsed;
+            return new Map<string, Score>(Object.entries(JSON.parse(localStorageData)));
         } else {
             return new Map();
         }
+    }
+
+    public getAllScores(): Map<string, Score>{
+        return this.getLocalStorageData();
     }
 }

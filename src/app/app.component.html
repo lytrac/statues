@@ -1,15 +1,15 @@
 <div class="container">
     <mat-toolbar>
         <div class="toolbar__lead-button">
-            <button *ngIf="!home" mat-icon-button aria-label="Go back" matTooltip="Go back" (click)="goBack()">
+            <button *ngIf="section !== PATHS.home" mat-icon-button aria-label="Go back" matTooltip="Go back" (click)="goBack()">
                 <mat-icon>keyboard_backspace</mat-icon>
             </button>
         </div>
         <span class="toolbar__title">{{title}}</span>
-        <button *ngIf="home" mat-icon-button aria-label="Ranking" matTooltip="Ranking" (click)="goToRanking()">
+        <button *ngIf="section === PATHS.home" mat-icon-button aria-label="Ranking" matTooltip="Ranking" (click)="goToRanking()">
             <mat-icon>score</mat-icon>
         </button>
-        <button *ngIf="game" mat-icon-button aria-label="Audio On/Off" matTooltip="Audio On/Off" (click)="mute()">
+        <button *ngIf="section === PATHS.game" mat-icon-button aria-label="Audio On/Off" matTooltip="Audio On/Off" (click)="mute()">
             <mat-icon *ngIf="!muted">volume_up</mat-icon>
             <mat-icon *ngIf="muted">volume_off</mat-icon>
         </button>

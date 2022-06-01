@@ -3,7 +3,7 @@ import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { MediaService } from './services/media.service';
-import { RouterService } from './services/router.service';
+import { PATHS, RouterService } from './services/router.service';
 
 @Component({
   selector: 'app-root',
@@ -13,9 +13,10 @@ import { RouterService } from './services/router.service';
 })
 export class AppComponent {
   title = 'Statues';
-  home = false;
-  game = false;
   muted = true;
+  section: string = PATHS.home;
+
+  PATHS = PATHS;
 
   constructor(private mediaService: MediaService, private activatedRoute: ActivatedRoute, private router: Router, private routerService: RouterService, private iconRegistry: MatIconRegistry,
     private sanitizer: DomSanitizer) {
@@ -23,23 +24,26 @@ export class AppComponent {
       // Need to check the event type because the event types doesn't share an interface
       if (routeChange instanceof NavigationEnd) {
         const navigationEndEvent = routeChange as NavigationEnd;
-
-        if (this.routerService.isHome(navigationEndEvent)) {
-          this.home = true;
-          this.game = false;
-          this.title = "Statues";
-        } else {
-          this.home = false;
-          this.game = true;
-          if (this.routerService.isGame(navigationEndEvent)) {
-            this.title = `Hi ${this.activatedRoute.snapshot.queryParamMap.get('name')}`;
-          }
-        }
+        this.section = this.routerService.getCurrentSection(navigationEndEvent);
+        this.title = this.getTitle();
       }
     });
 
     // Load icons as early as possible
     this.preloadIcons();
+  }
+
+  getTitle(): string {
+    switch (this.section) {
+      case PATHS.home:
+        return "Statues";
+      case PATHS.game:
+        return `Hi ${this.activatedRoute.snapshot.queryParamMap.get('name')}`;
+      case PATHS.ranking:
+        return "Ranking";
+      default:
+        return "Statues";
+    }
   }
 
   preloadIcons() {

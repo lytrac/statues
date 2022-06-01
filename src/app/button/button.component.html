@@ -1,4 +1,4 @@
-<button class="button" mat-raised-button color="primary" [ngClass]="customClass" (clicked)="click()">
+<button class="button" attr.aria-label="{{text}}" mat-raised-button color="primary" [ngClass]="customClass" (clicked)="click()">
     <mat-icon *ngIf="leadingIcon" [svgIcon]="leadingIcon"></mat-icon>
     <span>{{text}}</span>
     <mat-icon *ngIf="trailingIcon" [svgIcon]="trailingIcon"></mat-icon>

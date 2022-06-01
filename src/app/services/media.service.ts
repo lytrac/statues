@@ -32,8 +32,6 @@ export class MediaService {
     }
 
     private vibrate(pattern: VibratePattern) {
-        this.audio.play();
-
         if (window.navigator && window.navigator['vibrate']) {
             window.navigator.vibrate(pattern);
         }

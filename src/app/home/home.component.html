@@ -6,7 +6,7 @@
   <div>
     <mat-form-field appearance="outline">
       <mat-label>Name</mat-label>
-      <input matInput placeholder="Name" [formControl]="name" required>
+      <input matInput placeholder="Name" aria-label="Input name" [formControl]="name" required (keyup.enter)="onSubmit()">
       <mat-error *ngIf="name.invalid">Enter a username</mat-error>
     </mat-form-field>
   </div>
