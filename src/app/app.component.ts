@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { MediaService } from './services/media.service';
 import { RouterService } from './services/router.service';
 
 @Component({
@@ -13,8 +14,10 @@ import { RouterService } from './services/router.service';
 export class AppComponent {
   title = 'Statues';
   home = false;
+  game = false;
+  muted = true;
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private routerService: RouterService, private iconRegistry: MatIconRegistry,
+  constructor(private mediaService: MediaService, private activatedRoute: ActivatedRoute, private router: Router, private routerService: RouterService, private iconRegistry: MatIconRegistry,
     private sanitizer: DomSanitizer) {
     this.router.events.subscribe((routeChange) => {
       // Need to check the event type because the event types doesn't share an interface
@@ -23,9 +26,11 @@ export class AppComponent {
 
         if (this.routerService.isHome(navigationEndEvent)) {
           this.home = true;
+          this.game = false;
           this.title = "Statues";
         } else {
           this.home = false;
+          this.game = true;
           if (this.routerService.isGame(navigationEndEvent)) {
             this.title = `Hi ${this.activatedRoute.snapshot.queryParamMap.get('name')}`;
           }
@@ -53,5 +58,9 @@ export class AppComponent {
   }
   goToRanking() {
     this.routerService.openRanking();
+  }
+
+  mute() {
+    this.muted = this.mediaService.toggleAudio();
   }
 }

@@ -104,7 +104,9 @@ export class GameService {
     }
 
     private setTimer(): void {
-        this.timeout = setTimeout(() => this.lightChange.next(this.changeColor()), this.getLightTime());
+        const time = this.getLightTime();
+        this.startAudio(time);
+        this.timeout = setTimeout(() => this.lightChange.next(this.changeColor()), time);
     }
 
     private changeColor(): LightColor {
@@ -117,6 +119,12 @@ export class GameService {
         }
         this.setTimer();
         return this.lightColor;
+    }
+
+    private startAudio(time: number) {
+        if (this.lightColor === LightColor.Green) {
+            this.mediaService.startAudio(time);
+        }
     }
 
     private getLightTime(): number {

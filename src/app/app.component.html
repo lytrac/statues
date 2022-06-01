@@ -9,6 +9,10 @@
         <button *ngIf="home" mat-icon-button aria-label="Ranking" matTooltip="Ranking" (click)="goToRanking()">
             <mat-icon>score</mat-icon>
         </button>
+        <button *ngIf="game" mat-icon-button aria-label="Audio On/Off" matTooltip="Audio On/Off" (click)="mute()">
+            <mat-icon *ngIf="!muted">volume_up</mat-icon>
+            <mat-icon *ngIf="muted">volume_off</mat-icon>
+        </button>
     </mat-toolbar>
     <div class="content">
         <router-outlet></router-outlet>
