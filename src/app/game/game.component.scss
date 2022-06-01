@@ -12,14 +12,10 @@
     color: red;
 }
 
-.game__button {
+.game__buttons-container {
+    display: flex;
+}
+
+.game__buttons-container * {
     width: 50%;
-}
-
-.game__button--left {
-    border-radius: 5px 0px 0px 5px;
-}
-
-.game__button--right {
-    border-radius: 0px 5px 5px 0px;
 }

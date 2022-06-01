@@ -1,6 +1,4 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { MatIconRegistry } from '@angular/material/icon';
-import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { GameService, Step } from '../services/game.service';
 import { RouterService } from '../services/router.service';
@@ -26,17 +24,7 @@ export class GameComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private routerService: RouterService,
     private gameService: GameService,
-    private iconRegistry: MatIconRegistry,
-    private sanitizer: DomSanitizer
   ) {
-    this.iconRegistry.addSvgIcon(
-      'steps-left',
-      this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/steps-left.svg')
-    );
-    this.iconRegistry.addSvgIcon(
-      'steps-right',
-      this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/steps-right.svg')
-    );
   }
 
   ngOnInit(): void {

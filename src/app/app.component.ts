@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Route, Router, RouterEvent } from '@angular/router';
+import { MatIconRegistry } from '@angular/material/icon';
+import { DomSanitizer } from '@angular/platform-browser';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { RouterService } from './services/router.service';
 
 @Component({
@@ -12,7 +14,8 @@ export class AppComponent {
   title = 'Statues';
   home = false;
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private routerService: RouterService) {
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private routerService: RouterService, private iconRegistry: MatIconRegistry,
+    private sanitizer: DomSanitizer) {
     this.router.events.subscribe((routeChange) => {
       // Need to check the event type because the event types doesn't share an interface
       if (routeChange instanceof NavigationEnd) {
@@ -29,6 +32,20 @@ export class AppComponent {
         }
       }
     });
+
+    // Load icons as early as possible
+    this.preloadIcons();
+  }
+
+  preloadIcons() {
+    this.iconRegistry.addSvgIcon(
+      'steps-left',
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/steps-left.svg')
+    );
+    this.iconRegistry.addSvgIcon(
+      'steps-right',
+      this.sanitizer.bypassSecurityTrustResourceUrl('assets/icons/steps-right.svg')
+    );
   }
 
   goBack() {
