@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Subject, Subscription, takeUntil, timer } from "rxjs";
+import { Subject } from "rxjs";
+import { MediaService } from "./media.service";
 import { ScoreService } from "./score.service";
 
 export enum Step {
@@ -53,7 +54,7 @@ export class GameService {
 
     private name: string = "";
 
-    constructor(private scoreService: ScoreService) {
+    constructor(private scoreService: ScoreService, private mediaService: MediaService) {
     }
 
     public getGameIconClass(): string {
@@ -68,7 +69,10 @@ export class GameService {
         if (this.lightColor === LightColor.Off) return this.score;
 
         if (this.lightColor === LightColor.Red) {
-            this.score = 0;
+            if (this.score > 0) {
+                this.score = 0;
+                this.mediaService.longVibrate();
+            }
             return this.score;
         }
 
@@ -76,6 +80,7 @@ export class GameService {
             if (this.score > 0) {
                 this.score--;
             }
+            this.mediaService.shortVibrate();
             return this.score;
         }
 
@@ -106,6 +111,8 @@ export class GameService {
         if (this.lightColor === LightColor.Off || this.lightColor === LightColor.Green) {
             this.lightColor = LightColor.Red;
         } else {
+            // When green light comes, we can step with both feets
+            this.lastStep = Step.None;
             this.lightColor = LightColor.Green;
         }
         this.setTimer();
